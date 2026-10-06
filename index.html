@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COS| Shoe Store</title>
+
+    <!-- Embedded CSS for single-page setup -->
+    <style>
+        /* 1. Global Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #fcfcfc;
+            color: #111;
+        }
+
+        /* 2. Top Navigation Bar */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #eaeaea;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #000;
+            border: 2px solid #000;
+            padding: 4px 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        /* 3. Hero Section (Front Banner Image) */
+        .hero {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .hero-banner {
+            display: flex;
+            background-color: #0a0a0a;
+            border-radius: 4px;
+            overflow: hidden;
+            min-height: 420px;
+        }
+
+        .hero-image-box {
+            flex: 1.3;
+            position: relative;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .hero-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-text-box {
+            flex: 1;
+            background-color: #0a0a0a;
+            color: #fff;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .hero-tag {
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 12px;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .shop-now-btn {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            padding: 12px 32px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .shop-now-btn:hover {
+            background-color: #e5e5e5;
+            transform: translateY(-2px);
+        }
+
+        /* 4. Products Section ("LATEST DROPS") */
+        .products-section {
+            max-width: 1200px;
+            margin: 60px auto 40px;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #111;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .section-header h2 {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .section-header span {
+            font-size: 13px;
+            color: #777;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px);
+            border-color: #ccc;
+        }
+
+        .product-img-wrap {
+            width: 100%;
+            height: 220px;
+            background-color: #f7f7f7;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-img-wrap img {
+            transform: scale(1.05);
+        }
+
+        .product-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 6px;
+        }
+
+        .product-desc {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .price-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #000;
+        }
+
+        .buy-btn {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 9px 18px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .buy-btn:hover {
+            background-color: #333;
+        }
+
+        /* 5. Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-banner {
+                flex-direction: column;
+            }
+
+            .hero-image-box {
+                height: 250px;
+            }
+
+            .hero-text-box {
+                padding: 30px 20px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. Header / Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="logo">COS</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 2. Home Hero Section (Front Showcase Image) -->
+    <section id="home" class="hero">
+        <div class="hero-banner">
+            <!-- Front Image Provided by User -->
+            <div class="hero-image-box">
+                <img src="WhatsApp Image 2026-10-05 at 11.54.35 AM.jpeg" alt="Featured Sneaker Store Front">
+            </div>
+            <!-- Right Content Panel -->
+            <div class="hero-text-box">
+                <p class="hero-tag">Authenticity. 100% Guaranteed.</p>
+                <h1 class="hero-title">Exclusive Sneaker Collection</h1>
+                <p class="hero-subtitle">Discover the hottest drops and timeless classics. Premium comfort and style
+                    delivered to your doorstep.</p>
+                <a href="#products" class="shop-now-btn">SHOP NOW</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Products Section ("LATEST DROPS") -->
+    <section id="products" class="products-section">
+        <div class="section-header">
+            <h2>LATEST DROPS</h2>
+            <span>12 Styles Available</span>
+        </div>
+
+        <div class="product-grid">
+
+            <!-- Shoe 1 - Adidas Campus 00s Forest Green -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-05 at 11.54.34 AM.jpeg" alt="Adidas Campus 00s Forest Green">
+                </div>
+                <h3 class="product-name">Adidas Campus 00s – Forest Green</h3>
+                <p class="product-desc">Iconic low-top suede sneaker with plush finish, three-stripe detail, and gum
+                    rubber sole.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹2,399</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Shoe 2 - ASICS Gel-Kahana 8 Jade Black -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-05 at 11.54.34 AM (1).jpeg" alt="ASICS Gel-Kahana 8 Jade Black">
+                </div>
+                <h3 class="product-name">ASICS Gel-Kahana 8 – Jade Black</h3>
+                <p class="product-desc">High-performance trail runner with GEL cushioning technology, breathable mesh
+                    upper, and rugged outsole.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹3,299</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Shoe 3 - New Balance 610 Trail Grey Blue -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-05 at 11.54.34 AM (2).jpeg" alt="New Balance 610 Trail Grey Blue">
+                </div>
+                <h3 class="product-name">New Balance 610 Trail – Grey Blue</h3>
+                <p class="product-desc">All-terrain retro trail cruiser with multi-surface grip, reflective details, and
+                    bold N logo.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹1,999</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+
+            <!-- Shoe 5 - ASICS Gel-1130 White Crimson Red -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-06 at 10.42.08 AM.jpeg" alt="ASICS Gel-1130 White Crimson Red">
+                </div>
+                <h3 class="product-name">ASICS Gel-1130 – White Crimson Red</h3>
+                <p class="product-desc">Retro-styled runner with premium GEL cushioning, reflective overlays, and bold
+                    crimson red accents.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹2,999</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Shoe 6 - Puma Speedcat OG Red White -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-06 at 10.42.08 AM (1).jpeg" alt="Puma Speedcat OG Red White">
+                </div>
+                <h3 class="product-name">Puma Speedcat OG – Red White</h3>
+                <p class="product-desc">Motorsport-inspired low-profile sneaker with suede upper, Puma cat logo, and
+                    vintage racing DNA.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹2,499</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Shoe 7 - Nike Dunk High AMBUSH Volt Black -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-06 at 10.42.09 AM.jpeg" alt="Nike Dunk High AMBUSH Volt Black">
+                </div>
+                <h3 class="product-name">Nike Dunk High AMBUSH – Volt Black</h3>
+                <p class="product-desc">Bold high-top collaboration with AMBUSH featuring a striking volt leather upper
+                    and oversized Swoosh.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹3,299</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Shoe 8 - New Balance 1906R Black Silver -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-06 at 10.42.09 AM (1).jpeg" alt="New Balance 1906R Black Silver">
+                </div>
+                <h3 class="product-name">New Balance 1906R – Black Silver</h3>
+                <p class="product-desc">Premium dad-style runner with N-ergy foam midsole, ABZORB cushioning, and
+                    reflective detailing.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹2,899</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Shoe 9 - Nike SB Dunk Low Kermit Green White -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-06 at 10.42.09 AM (2).jpeg"
+                        alt="Nike SB Dunk Low Kermit Green White">
+                </div>
+                <h3 class="product-name">Nike SB Dunk Low – Kermit Green</h3>
+                <p class="product-desc">Street-ready skate sneaker in vivid Kermit Green leather with white Swoosh and
+                    herringbone outsole.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹1,999</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Shoe 10 - Adidas Adimatic x Neighborhood Grey -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-06 at 10.42.10 AM.jpeg" alt="Adidas Adimatic Neighborhood Grey">
+                </div>
+                <h3 class="product-name">Adidas Adimatic x Neighborhood – Grey</h3>
+                <p class="product-desc">Collab low-top with serrated shark-tooth outsole, premium grey suede upper, and
+                    woven badge detail.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹2,399</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Shoe 11 - Onitsuka Tiger Mexico 66 Yellow Black -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-06 at 10.42.10 AM (1).jpeg"
+                        alt="Onitsuka Tiger Mexico 66 Yellow Black">
+                </div>
+                <h3 class="product-name">Onitsuka Tiger Mexico 66 – Yellow Black</h3>
+                <p class="product-desc">Iconic retro runner in bold yellow and black — a timeless silhouette with
+                    leather upper and cushioned sole.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹2,499</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Shoe 12 - Nike Cortez UNION LA Peach Pink -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-06 at 10.42.10 AM (2).jpeg" alt="Nike Cortez UNION LA Peach Pink">
+                </div>
+                <h3 class="product-name">Nike Cortez x UNION LA – Peach Pink</h3>
+                <p class="product-desc">Limited-edition collab with a retro nylon and suede build, pastel pink colorway,
+                    and vintage Cortez sole.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹2,999</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Shoe 13 - Nike Dunk Low Disrupt 2 Green White -->
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="WhatsApp Image 2026-10-06 at 10.42.11 AM.jpeg" alt="Nike Dunk Low Disrupt 2 Green White">
+                </div>
+                <h3 class="product-name">Nike Dunk Low Disrupt 2 – Malachite Green</h3>
+                <p class="product-desc">Deconstructed Dunk silhouette with exaggerated overlays, malachite green suede,
+                    and blue Swoosh stitching.</p>
+                <div class="product-bottom">
+                    <div>
+                        <div class="price-label">Price</div>
+                        <div class="product-price">₹2,899</div>
+                    </div>
+                    <button class="buy-btn" type="button">Buy Now</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+
+</html>
